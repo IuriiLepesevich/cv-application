@@ -1,0 +1,28 @@
+.work .input-holder {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 15px;
+  padding: 15px 10px;
+}
+
+.work .input-holder input {
+  font-size: 1.2rem;
+  padding: 3px;
+}
+
+.work .input-holder p {
+  font-size: 1.5rem;
+  padding: 3px;
+}
+
+.date-holder {
+  display: flex;
+  font-size: 1.2rem;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-holder input[type="date"] {
+  flex: 1;
+}
