@@ -1,0 +1,13 @@
+.button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+
+.button-holder > button {
+  width: 10rem;
+  padding: 5px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}

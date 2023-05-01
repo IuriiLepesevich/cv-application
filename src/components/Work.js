@@ -6,7 +6,7 @@ class Work extends Component {
     const { title, editable, textData, changeWorkOngoing } = this.props;
     if (!editable)
       return (
-        <div className="work">
+        <div id={textData.id} className="work">
           <h2>{title}</h2>
           <div className="input-holder">
             <p id="work-name">{textData.company}</p>
@@ -18,7 +18,7 @@ class Work extends Component {
       );
     else
       return (
-        <div className="work">
+        <div id={textData.id} className="work">
           <h2>{title}</h2>
           <div className="input-holder">
             <input
@@ -57,6 +57,7 @@ class Work extends Component {
               <input
                 type="checkbox"
                 id="work-ongoing"
+                data-id={textData.id}
                 onChange={changeWorkOngoing}
                 defaultChecked={textData.ongoing}
               />
