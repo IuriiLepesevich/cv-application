@@ -225,12 +225,15 @@ class Form extends Component {
   }
 
   render() {
-    const { educations, works } = this.state;
+    const { educations, works, isEditable } = this.state;
 
     let educationButtons;
     let workButtons;
+    const isEditableClass = `cv-form ${
+      isEditable ? "editable" : "non-editable"
+    }`;
 
-    if (this.state.isEditable) {
+    if (isEditable) {
       educationButtons = (
         <AddRemoveButtons
           add={this.addEducation}
@@ -249,7 +252,7 @@ class Form extends Component {
     }
 
     return (
-      <form className="cv-form" onSubmit={this.submitForm}>
+      <form className={isEditableClass} onSubmit={this.submitForm}>
         <GeneralInfo
           title="General Info"
           editable={this.state.isEditable}

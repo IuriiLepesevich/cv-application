@@ -2,4 +2,30 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 10px 0px;
+  border-radius: 1rem;
+}
+
+.cv-form.editable {
+  background-color: rgb(255, 236, 197);
+}
+
+.cv-form.non-editable {
+  background-color: rgb(218, 247, 166);
+}
+
+#submit {
+  background-color: rgb(156, 255, 156);
+}
+
+#submit:hover {
+  background-color: rgb(134, 219, 134);
+}
+
+#edit {
+  background-color: rgb(255, 148, 109);
+}
+
+#edit:hover {
+  background-color: rgb(255, 111, 58);
 }

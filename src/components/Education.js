@@ -9,10 +9,22 @@ class Education extends Component {
         <div id={textData.id} className="education">
           <h2>{title}</h2>
           <div className="input-holder">
-            <p id="school-name">{textData.school}</p>
-            <p id="study-field">{textData.field}</p>
-            <p id="study-date-start">{textData.dateStart}</p>
-            <p id="study-date-end">{textData.dateEnd}</p>
+            <p id="school-name">
+              <span>School:</span>
+              <span>{textData.school}</span>
+            </p>
+            <p id="study-field">
+              <span>Field:</span>
+              <span>{textData.field}</span>
+            </p>
+            <p id="study-date-start">
+              <span>From:</span>
+              <span>{textData.dateStart}</span>
+            </p>
+            <p id="study-date-end">
+              <span>To:</span>
+              <span>{textData.dateEnd}</span>
+            </p>
           </div>
         </div>
       );

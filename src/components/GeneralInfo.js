@@ -9,10 +9,10 @@ class GeneralInfo extends Component {
         <div className="general-info">
           <h2>{title}</h2>
           <div className="input-holder">
-            <p id="name">{textData.name}</p>
-            <p id="surname">{textData.surname}</p>
-            <p id="email">{textData.mail}</p>
-            <p id="phone">{textData.phone}</p>
+            <p id="name"><span>Name:</span> <span>{textData.name}</span></p>
+            <p id="surname"><span>Surname:</span> <span>{textData.surname}</span></p>
+            <p id="email"><span>E-Mail:</span> <span>{textData.mail}</span></p>
+            <p id="phone"><span>Phone:</span> <span>{textData.phone}</span></p>
           </div>
         </div>
       );

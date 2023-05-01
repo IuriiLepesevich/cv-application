@@ -1,8 +1,8 @@
 .App {
   width: 800px;
   margin: 20px auto;
-  background-color: rgb(224, 224, 224);
   padding: 20px 40px;
+  border: 3px dotted black;
 }
 
 h1,
@@ -26,20 +26,4 @@ h2 {
   font-weight: 500;
   border: none;
   border-radius: 0.6rem;
-}
-
-#submit {
-  background-color: rgb(156, 255, 156);
-}
-
-#submit:hover {
-  background-color: rgb(134, 219, 134);
-}
-
-#edit {
-  background-color: rgb(255, 148, 109);
-}
-
-#edit:hover {
-  background-color: rgb(255, 111, 58);
 }

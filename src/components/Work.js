@@ -9,10 +9,22 @@ class Work extends Component {
         <div id={textData.id} className="work">
           <h2>{title}</h2>
           <div className="input-holder">
-            <p id="work-name">{textData.company}</p>
-            <p id="work-position">{textData.position}</p>
-            <p id="work-date-start">{textData.dateStart}</p>
-            <p id="work-date-end">{textData.dateEnd}</p>
+            <p id="work-name">
+              <span>Work:</span>
+              <span>{textData.company}</span>
+            </p>
+            <p id="work-position">
+              <span>Position:</span>
+              <span>{textData.position}</span>
+            </p>
+            <p id="work-date-start">
+              <span>From:</span>
+              <span>{textData.dateStart}</span>
+            </p>
+            <p id="work-date-end">
+              <span>To:</span>
+              <span>{textData.dateEnd}</span>
+            </p>
           </div>
         </div>
       );
