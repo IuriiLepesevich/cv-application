@@ -253,6 +253,7 @@ class Form extends Component {
 
     return (
       <form className={isEditableClass} onSubmit={this.submitForm}>
+        <h1>CV Application</h1>
         <GeneralInfo
           title="General Info"
           editable={this.state.isEditable}
