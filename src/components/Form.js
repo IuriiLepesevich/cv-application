@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import "../styles/Form.css";
 import GeneralInfo from "./GeneralInfo";
@@ -6,151 +6,128 @@ import Education from "./Education";
 import Work from "./Work";
 import AddRemoveButtons from "./AddRemoveButtons";
 
-class Form extends Component {
-  constructor(props) {
-    super(props);
+const Form = (props) => {
+  const [isEditable, setIsEditable] = useState(true);
+  const [generalInfo, setGeneralInfo] = useState({
+    name: "",
+    surname: "",
+    mail: "",
+    phone: "",
+  });
+  const [educations, setEducations] = useState([
+    {
+      school: "",
+      field: "",
+      dateStart: "",
+      dateEnd: "",
+      ongoing: false,
+      id: uniqid(),
+    },
+  ]);
+  const [works, setWorks] = useState([
+    {
+      company: "",
+      position: "",
+      dateStart: "",
+      dateEnd: "",
+      ongoing: false,
+      id: uniqid(),
+    },
+  ]);
 
-    this.state = {
-      isEditable: true,
-      generalInfo: {
-        name: "",
-        surname: "",
-        mail: "",
-        phone: "",
-      },
-      educations: [
-        {
-          school: "",
-          field: "",
-          dateStart: "",
-          dateEnd: "",
-          ongoing: false,
-          id: uniqid(),
-        },
-      ],
-      works: [
-        {
-          company: "",
-          position: "",
-          dateStart: "",
-          dateEnd: "",
-          ongoing: false,
-          id: uniqid(),
-        },
-      ],
-    };
-    this.submitForm = this.submitForm.bind(this);
-    this.editForm = this.editForm.bind(this);
-    this.changeEducationOngoing = this.changeEducationOngoing.bind(this);
-    this.changeWorkOngoing = this.changeWorkOngoing.bind(this);
-    this.addEducation = this.addEducation.bind(this);
-    this.removeLastEducation = this.removeLastEducation.bind(this);
-    this.addWork = this.addWork.bind(this);
-    this.removeLastWork = this.removeLastWork.bind(this);
-  }
-
-  addEducation() {
-    this.setState((state) => ({
-      educations: state.educations.concat({
+  const addEducation = () => {
+    setEducations(
+      educations.concat({
         school: "",
         field: "",
         dateStart: "",
         dateEnd: "",
         ongoing: false,
         id: uniqid(),
-      }),
-    }));
-  }
+      })
+    );
+  };
 
-  removeLastEducation() {
-    this.setState((state) => ({
-      educations: state.educations.slice(0, -1),
-    }));
-  }
+  const removeLastEducation = () => {
+    setEducations(educations.slice(0, -1));
+  };
 
-  addWork() {
-    this.setState((state) => ({
-      works: state.works.concat({
+  const addWork = () => {
+    setWorks(
+      works.concat({
         company: "",
         position: "",
         dateStart: "",
         dateEnd: "",
         ongoing: false,
         id: uniqid(),
-      }),
-    }));
-  }
+      })
+    );
+  };
 
-  removeLastWork() {
-    this.setState((state) => ({
-      works: state.works.slice(0, -1),
-    }));
-  }
+  const removeLastWork = () => {
+    setWorks(works.slice(0, -1));
+  };
 
-  changeEducationOngoing(e) {
-    this.setState((state) => {
-      const targetId = e.target.dataset.id;
-      const isChecked = e.target.checked;
-      return {
-        educations: state.educations.map((education) => {
-          if (education.id === targetId) {
-            return {
-              school: education.school,
-              field: education.field,
-              dateStart: education.dateStart,
-              dateEnd: education.dateEnd,
-              ongoing: isChecked,
-              id: education.id,
-            };
-          } else return education;
-        }),
-      };
-    });
-  }
+  const changeEducationOngoing = (e) => {
+    const targetId = e.target.dataset.id;
+    const isChecked = e.target.checked;
+    setEducations(
+      educations.map((education) => {
+        if (education.id === targetId) {
+          return {
+            school: education.school,
+            field: education.field,
+            dateStart: education.dateStart,
+            dateEnd: education.dateEnd,
+            ongoing: isChecked,
+            id: education.id,
+          };
+        } else return education;
+      })
+    );
+  };
 
-  changeWorkOngoing(e) {
-    this.setState((state) => {
-      const targetId = e.target.dataset.id;
-      const isChecked = e.target.checked;
-      return {
-        works: state.works.map((work) => {
-          if (work.id === targetId) {
-            return {
-              company: work.school,
-              position: work.field,
-              dateStart: work.dateStart,
-              dateEnd: work.dateEnd,
-              ongoing: isChecked,
-              id: work.id,
-            };
-          } else return work;
-        }),
-      };
-    });
-  }
+  const changeWorkOngoing = (e) => {
+    const targetId = e.target.dataset.id;
+    const isChecked = e.target.checked;
+    setWorks(
+      works.map((work) => {
+        if (work.id === targetId) {
+          return {
+            company: work.school,
+            position: work.field,
+            dateStart: work.dateStart,
+            dateEnd: work.dateEnd,
+            ongoing: isChecked,
+            id: work.id,
+          };
+        } else return work;
+      })
+    );
+  };
 
-  submitForm(e) {
+  const submitForm = (e) => {
     e.preventDefault();
 
-    if (!this.state.isEditable) return;
+    if (!isEditable) return;
 
     const newName = document.querySelector("#name").value;
     const newSurname = document.querySelector("#surname").value;
     const newMail = document.querySelector("#email").value;
     const newPhone = document.querySelector("#phone").value;
 
-    this.setState((state) => ({
-      isEditable: false,
-      generalInfo: {
-        name: newName,
-        surname: newSurname,
-        mail: newMail,
-        phone: newPhone,
-      },
-    }));
+    setIsEditable(false);
 
-    this.setState((state) => ({
-      educations: state.educations.map((education) => {
+    setGeneralInfo({
+      name: newName,
+      surname: newSurname,
+      mail: newMail,
+      phone: newPhone,
+    });
+
+    setEducations(
+      educations.map((education) => {
         const currentId = education.id;
         const newSchool = document.querySelector(
           `#${currentId} #school-name`
@@ -180,11 +157,11 @@ class Form extends Component {
           ongoing: educationIsOngoing,
           id: currentId,
         };
-      }),
-    }));
+      })
+    );
 
-    this.setState((state) => ({
-      works: state.works.map((work) => {
+    setWorks(
+      works.map((work) => {
         const currentId = work.id;
         const newCompany = document.querySelector(
           `#${currentId} #work-name`
@@ -214,78 +191,66 @@ class Form extends Component {
           ongoing: workIsOngoing,
           id: work.id,
         };
-      }),
-    }));
-  }
+      })
+    );
+  };
 
-  editForm(e) {
-    this.setState((state) => ({
-      isEditable: true,
-    }));
-  }
+  const editForm = (e) => {
+    setIsEditable(true);
+  };
 
-  render() {
-    const { educations, works, isEditable } = this.state;
+  let educationButtons;
+  let workButtons;
+  const isEditableClass = `cv-form ${isEditable ? "editable" : "non-editable"}`;
 
-    let educationButtons;
-    let workButtons;
-    const isEditableClass = `cv-form ${
-      isEditable ? "editable" : "non-editable"
-    }`;
+  if (isEditable) {
+    educationButtons = (
+      <AddRemoveButtons
+        add={addEducation}
+        remove={removeLastEducation}
+        name={"Education"}
+      />
+    );
 
-    if (isEditable) {
-      educationButtons = (
-        <AddRemoveButtons
-          add={this.addEducation}
-          remove={this.removeLastEducation}
-          name={"Education"}
-        />
-      );
-
-      workButtons = (
-        <AddRemoveButtons
-          add={this.addWork}
-          remove={this.removeLastWork}
-          name={"Work"}
-        />
-      );
-    }
-
-    return (
-      <form className={isEditableClass} onSubmit={this.submitForm}>
-        <h1>CV Application</h1>
-        <GeneralInfo
-          title="General Info"
-          editable={this.state.isEditable}
-          textData={this.state.generalInfo}
-        />
-        {educations.map((education) => (
-          <Education
-            key={education.id}
-            title="Education"
-            editable={this.state.isEditable}
-            changeEducationOngoing={this.changeEducationOngoing}
-            textData={education}
-          />
-        ))}
-        {educationButtons}
-        {works.map((work) => (
-          <Work
-            key={work.id}
-            title="Work"
-            editable={this.state.isEditable}
-            changeWorkOngoing={this.changeWorkOngoing}
-            textData={work}
-          />
-        ))}
-        {workButtons}
-        <div className="buttons">
-          <input type="submit" value="Submit" id="submit" />
-          <input type="button" value="Edit" id="edit" onClick={this.editForm} />
-        </div>
-      </form>
+    workButtons = (
+      <AddRemoveButtons add={addWork} remove={removeLastWork} name={"Work"} />
     );
   }
-}
+
+  return (
+    <form className={isEditableClass} onSubmit={submitForm}>
+      <h1>CV Application</h1>
+      <GeneralInfo
+        title="General Info"
+        editable={isEditable}
+        textData={generalInfo}
+      />
+      {educations.map((education) => (
+        <Education
+          key={education.id}
+          title="Education"
+          editable={isEditable}
+          changeEducationOngoing={changeEducationOngoing}
+          textData={education}
+        />
+      ))}
+      {educationButtons}
+      {works.map((work) => (
+        <Work
+          key={work.id}
+          title="Work"
+          editable={isEditable}
+          changeWorkOngoing={changeWorkOngoing}
+          textData={work}
+        />
+      ))}
+      {workButtons}
+      <div className="buttons">
+        <input type="submit" value="Submit" id="submit" />
+        <input type="button" value="Edit" id="edit" onClick={editForm} />
+      </div>
+    </form>
+  );
+};
 
 export default Form;
